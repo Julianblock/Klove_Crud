@@ -10,107 +10,107 @@ using System.Web.Mvc;
 
 namespace Klove_Crud.Models
 {
-    public class MoviesController : Controller
+    public class EmployeesController : Controller
     {
-        private MovieDBContext db = new MovieDBContext();
+        private Klove_CrudContext db = new Klove_CrudContext();
 
-        // GET: Movies
+        // GET: Employees
         public async Task<ActionResult> Index()
         {
-            return View(await db.Movies.ToListAsync());
+            return View(await db.Employees.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: Employees/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = await db.Movies.FindAsync(id);
-            if (movie == null)
+            Employees employees = await db.Employees.FindAsync(id);
+            if (employees == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(employees);
         }
 
-        // GET: Movies/Create
+        // GET: Employees/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<ActionResult> Create([Bind(Include = "ID,firstName,lastName,startDate,Position,Salary,departmentID,Email,Phone")] Employees employees)
         {
             if (ModelState.IsValid)
             {
-                db.Movies.Add(movie);
+                db.Employees.Add(employees);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(movie);
+            return View(employees);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Employees/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = await db.Movies.FindAsync(id);
-            if (movie == null)
+            Employees employees = await db.Employees.FindAsync(id);
+            if (employees == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(employees);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Employees/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,firstName,lastName,startDate,Position,Salary,departmentID,Email,Phone")] Employees employees)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(movie).State = EntityState.Modified;
+                db.Entry(employees).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(movie);
+            return View(employees);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Employees/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = await db.Movies.FindAsync(id);
-            if (movie == null)
+            Employees employees = await db.Employees.FindAsync(id);
+            if (employees == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(employees);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Movie movie = await db.Movies.FindAsync(id);
-            db.Movies.Remove(movie);
+            Employees employees = await db.Employees.FindAsync(id);
+            db.Employees.Remove(employees);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
