@@ -15,9 +15,23 @@ namespace Klove_Crud.Models
         private Klove_CrudContext db = new Klove_CrudContext();
 
         // GET: Employees
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await db.Employees.ToListAsync());
+
+            List<Employees> employeelist = db.Employees.ToList();
+
+            List<EmployeeViewModel> employeeVMList = employeelist.Select(e=> new EmployeeViewModel
+            {
+                firstName = e.firstName,
+                lastName = e.lastName,
+                Position = e.Position,
+                Salary = e.Salary,
+                Email = e.Email,
+                Phone = e.Phone,
+                departmentID = e.departmentID,
+                departmentName = e.Departments.Department }).ToList();
+
+            return View(employeeVMList);
         }
 
         // GET: Employees/Details/5
@@ -46,7 +60,7 @@ namespace Klove_Crud.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,firstName,lastName,startDate,Position,Salary,departmentID,Email,Phone")] Employees employees)
+        public async Task<ActionResult> Create([Bind(Include = "ID,firstName,lastName,startDate,Position,Salary,Email,Phone,departmentID")] Employees employees)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +92,7 @@ namespace Klove_Crud.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,firstName,lastName,startDate,Position,Salary,departmentID,Email,Phone")] Employees employees)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,firstName,lastName,startDate,Position,Salary,Email,Phone,departmentID")] Employees employees)
         {
             if (ModelState.IsValid)
             {

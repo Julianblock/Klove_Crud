@@ -8,18 +8,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Klove_Crud.Models
 {
-    public class Employees
+    public class EmployeeViewModel
     {
         public int ID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public DateTime startDate { get; set; }
         public string Position { get; set; }
         public decimal Salary { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public int departmentID { get; set; }
-
-        public virtual Departments Departments { get; set; }
+        public string departmentName { get; set; }
     }
-    
+
 }

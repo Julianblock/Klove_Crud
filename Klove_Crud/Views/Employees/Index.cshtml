@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Klove_Crud.Models.Employees>
+﻿@model IEnumerable<Klove_Crud.Models.EmployeeViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -18,16 +18,10 @@
             @Html.DisplayNameFor(model => model.lastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.startDate)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Position)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Salary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.departmentID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -35,34 +29,36 @@
         <th>
             @Html.DisplayNameFor(model => model.Phone)
         </th>
+        <th>
+            Department
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @if (Model != null ){
+    foreach (var item in Model ) {
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.firstName)
+            @item.firstName
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.lastName)
+            @item.lastName
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.startDate)
+            @item.Position
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Position)
+            @item.Salary
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Salary)
+            @item.Email
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.departmentID)
+            @item.Phone
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
+            @item.departmentName
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
@@ -70,6 +66,6 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
+    }
 }
-
 </table>

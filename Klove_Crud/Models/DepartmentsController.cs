@@ -14,6 +14,7 @@ namespace Klove_Crud.Models
     {
         private Klove_CrudContext db = new Klove_CrudContext();
 
+
         // GET: Departments
         public async Task<ActionResult> Index()
         {
